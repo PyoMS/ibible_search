@@ -9,4 +9,8 @@ spring:  h2:    console:      enabled: true
   jpa:    show-sql: true
     hibernate:      ddl-auto: create    defer-datasource-initialization: true
     database: h2
+    properties:
+      hibernate:
+        jdbc:
+          batch_size: 100      
   datasource:    url: jdbc:h2:mem:testdb
