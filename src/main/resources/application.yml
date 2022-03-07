@@ -1,6 +1,12 @@
 server:
-  port: 8088
+  port: 7068
 
 logging:
   level:
     org.springframework: DEBUG
+
+spring:  h2:    console:      enabled: true
+  jpa:    show-sql: true
+    hibernate:      ddl-auto: create    defer-datasource-initialization: true
+    database: h2
+  datasource:    url: jdbc:h2:mem:testdb

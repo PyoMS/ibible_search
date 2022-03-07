@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import com.pyo.home.DTO.Bible;
 
 @Repository
-public interface BibleRepository extends JpaRepository<Bible, String>{
+public interface IbibleRepository extends JpaRepository<Bible, String>{
 
 }
