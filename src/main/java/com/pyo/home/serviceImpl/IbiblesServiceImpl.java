@@ -30,16 +30,17 @@ public class IbiblesServiceImpl implements IbiblesService{
 				.baseUrl(uri.toString()).build();
 		String response = client.get().retrieve().bodyToMono(String.class).block();
 		Document doc = Jsoup.parseBodyFragment(response);
-		result = parseDoc(doc, "mat");
+		result = parseDoc(doc, "mat", "마태복음");
 		return result;
 	}
 	
-	public List<Bible> parseDoc(Document doc, String book) throws Exception{
+	public List<Bible> parseDoc(Document doc, String book_eng, String book_kor) throws Exception{
 		List<Bible> result = new ArrayList<>();
 		List<Node> list = doc.body().childNodes();
 		for (Node node : list) {
 			Bible bible = new Bible();
-			bible.setBook(book);
+			bible.setBook_eng(book_eng);
+			bible.setBook_kor(book_kor);
 			if(node.nodeName().equals("small") || node.nodeName()=="small") {
 //				logger.info("---start---");
 				String[] str = getSplitString(node.toString().trim());

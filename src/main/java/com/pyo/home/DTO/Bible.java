@@ -17,7 +17,8 @@ public class Bible {
 	@GeneratedValue
 	private Integer id; //book을 id로 갖게되면 무결성 위배(but, 에러 안뜨고 마지막 데이터만 처리됨.)
 	
-	private String book;
+	private String book_eng;
+	private String book_kor;
 	private String chapter;
 	private String verse;
 	private String contents;
