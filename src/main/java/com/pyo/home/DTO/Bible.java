@@ -1,5 +1,6 @@
 package com.pyo.home.DTO;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -21,5 +22,6 @@ public class Bible {
 	private String book_kor;
 	private String chapter;
 	private String verse;
+	@Column(length = 2000)
 	private String contents;
 }

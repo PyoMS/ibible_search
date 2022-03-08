@@ -9,6 +9,7 @@ import org.jsoup.nodes.Node;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+import org.springframework.web.reactive.function.client.ExchangeStrategies;
 import org.springframework.web.reactive.function.client.WebClient;
 
 import com.pyo.home.DTO.Bible;
@@ -20,17 +21,21 @@ public class IbiblesServiceImpl implements IbiblesService{
 	private static final Logger logger = LoggerFactory.getLogger(IbiblesServiceImpl.class);
 
 	@Override
-	public List<Bible> getBibles() throws Exception {
+	public List<Bible> getBibles(EnumBibleItems eb) throws Exception {
 		List<Bible> result = new ArrayList<>();
-		StringBuffer uri = new StringBuffer("");
-		uri.append("https://ibibles.net/quote.php");
-		uri.append("?kor-mat/5:3-6:12"); //TODO All list 조건으로 처리할 것.
+		StringBuffer uri = new StringBuffer("https://ibibles.net/quote.php");
+		uri.append("?kor-"+eb.getBook_eng()+"/1:1-"+eb.getLastChapter()+":"+eb.getLastVerse()); 
 		
+		ExchangeStrategies exchangeStrategies = ExchangeStrategies.builder()
+				.codecs(configurer -> configurer.defaultCodecs().maxInMemorySize(-1)).build(); // to unlimited memory size
+
 		WebClient client = (WebClient) WebClient.builder()
-				.baseUrl(uri.toString()).build();
+				.baseUrl(uri.toString()).exchangeStrategies(exchangeStrategies).build();
+		
 		String response = client.get().retrieve().bodyToMono(String.class).block();
 		Document doc = Jsoup.parseBodyFragment(response);
-		result = parseDoc(doc, "mat", "마태복음");
+		result = parseDoc(doc, eb.getBook_eng(), eb.toString());
+		
 		return result;
 	}
 	
@@ -59,5 +64,11 @@ public class IbiblesServiceImpl implements IbiblesService{
 		result[0] = result[0].replaceAll("<small>", "");
 		result[1] = result[1].replaceAll("</small>", "");
 		return result;
+	}
+	
+	public static void main(String[] args) {
+		for(EnumBibleItems eb : EnumBibleItems.values()) {
+			System.out.println(eb.toString());
+		}
 	}
 }

@@ -1,5 +1,10 @@
 package com.pyo.home.serviceImpl;
 
+import lombok.Getter;
+import lombok.ToString;
+
+@Getter
+//@ToString
 public enum EnumBibleItems {
 	창세기("ge",50,26), 
 	출애굽기("exo",40,38),
