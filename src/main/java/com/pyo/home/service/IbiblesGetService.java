@@ -9,7 +9,7 @@ import com.pyo.home.DTO.Bible;
 import com.pyo.home.serviceImpl.EnumBibleItems;
 
 @Service
-public interface IbiblesService {
+public interface IbiblesGetService {
 	public List<Bible> getBibles(EnumBibleItems eb) throws Exception;
 	
 }

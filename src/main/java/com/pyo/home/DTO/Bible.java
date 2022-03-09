@@ -24,4 +24,15 @@ public class Bible {
 	private String verse;
 	@Column(length = 2000)
 	private String contents;
+	
+	public Bible(String book_eng, String book_kor, String chapter, String verse, String contents) {
+		super();
+		this.book_eng = book_eng;
+		this.book_kor = book_kor;
+		this.chapter = chapter;
+		this.verse = verse;
+		this.contents = contents;
+	}
+	
+	
 }

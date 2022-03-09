@@ -13,12 +13,12 @@ import org.springframework.web.reactive.function.client.ExchangeStrategies;
 import org.springframework.web.reactive.function.client.WebClient;
 
 import com.pyo.home.DTO.Bible;
-import com.pyo.home.service.IbiblesService;
+import com.pyo.home.service.IbiblesGetService;
 
 
 @Service
-public class IbiblesServiceImpl implements IbiblesService{
-	private static final Logger logger = LoggerFactory.getLogger(IbiblesServiceImpl.class);
+public class IbiblesGetServiceImpl implements IbiblesGetService{
+	private static final Logger logger = LoggerFactory.getLogger(IbiblesGetServiceImpl.class);
 
 	@Override
 	public List<Bible> getBibles(EnumBibleItems eb) throws Exception {
