@@ -13,7 +13,6 @@ public class SearchController {
 	
 	@RequestMapping(value = {"/", "/home"}, method = RequestMethod.GET)
 	public String home(HttpServletRequest request, HttpServletResponse response, Model model) {
-		System.out.println("@@@");
 		return "/home";
 	}
 }
