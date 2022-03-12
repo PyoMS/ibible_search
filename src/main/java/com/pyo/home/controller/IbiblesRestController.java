@@ -19,9 +19,7 @@ public class IbiblesRestController {
 	
 	@GetMapping("/{contents}")
 	public List<Bible> retrieveContents(@PathVariable String contents) throws Exception{
-		System.out.println("@retrieveContents");
 		List<Bible> biblelist = ibibleRepository.findAllContents(contents);
-		
 		return biblelist;
 	}
 

@@ -4,7 +4,7 @@ height: 100%;
 width: 100%;
 margin: 0;
 padding: 0;
-background: #3c78e7 !important;
+background: linear-gradient(45deg, #3c78e7, yellow) !important;
 }
 
 .searchbar{

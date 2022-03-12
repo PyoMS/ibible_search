@@ -57,14 +57,14 @@
 	          <input class="search_input" id="search_input" type="text" name="" placeholder="Search...">
 	          <a class="search_icon" id="search_icon"><i class="fas fa-search"></i></a>
 	        </div>
-	        <div id="search_result">
-	        	<table class="d-flex justify-content-center h-100">
-					<tr>
-					  <th>Chapter</th>
-					  <th>Contents</th>
-					</tr>
-				</table>
-	        </div>
+<!-- 	        <div id="search_result"> -->
+<!-- 	        	<table class="d-flex justify-content-center h-100"> -->
+<!-- 					<tr> -->
+<!-- 					  <th>Chapter</th> -->
+<!-- 					  <th>Contents</th> -->
+<!-- 					</tr> -->
+<!-- 				</table> -->
+<!-- 	        </div> -->
 	      </div>
     	</div>
 	</body>
