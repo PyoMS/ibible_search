@@ -12,7 +12,6 @@
     	<script type="text/javascript">
 			$(function(){
 				$('#search_icon').click(function(){
-					alert('success - ' + $('#search_input').val());
 					searchAjax();
 				});
 				// Enter event
@@ -20,7 +19,7 @@
 				    if( evt.keyCode == 13 ) searchAjax();
 				});
 			});
-			
+			let hasResult = false;
 			let searchAjax = function(){
 					var params = $('#search_input').val();
 					$.ajax({
@@ -31,15 +30,34 @@
 						,dataType: 'json'
 						,success : function(response){
 							if(response){
+								if(response.length==0){
+									alert('Not Exist Data');
+// 									console.dir($("#search_input"));
+// 									console.dir(document.getElementById('search_input'));
+
+// 									document.getElementById('search_input').value = '';
+									$("#search_input")[0].value="";
+								}
+								var result;
+								if(hasResult){
+									result="";
+									console.dir($("#resultTable"));
+									$("#resultTable").empty();
+									$("#resultTable").append("<tr><td class=\"td_chapter\">Chapter</td><td>Contents</td></tr>");
+								}
 								var resLength = response.length;
 								for(var i=0;i<resLength;i++){
 									var data = response.pop();
-									console.log(data.book_kor);
-									console.log(data.chapter);
-									console.log(data.verse);
-									console.log(data.contents);
-									console.log('----------------');
+// 									console.log(data.book_kor);
+// 									console.log(data.chapter);
+// 									console.log(data.verse);
+// 									console.log(data.contents);
+// 									console.log('----------------');
+									result += "<tr><td class=\"td_chapter\">"+data.book_kor+" "+ data.chapter+"장"+data.verse+"절"+"</td><td>"+data.contents+"</td></tr>";
+									hasResult = true;
 								}
+								$("#resultTable").append(result);
+
 							}else{
 								alert('FAIL');
 							}
@@ -57,15 +75,18 @@
 	          <input class="search_input" id="search_input" type="text" name="" placeholder="Search...">
 	          <a class="search_icon" id="search_icon"><i class="fas fa-search"></i></a>
 	        </div>
-<!-- 	        <div id="search_result"> -->
-<!-- 	        	<table class="d-flex justify-content-center h-100"> -->
-<!-- 					<tr> -->
-<!-- 					  <th>Chapter</th> -->
-<!-- 					  <th>Contents</th> -->
-<!-- 					</tr> -->
-<!-- 				</table> -->
-<!-- 	        </div> -->
 	      </div>
+	      	<div class="search_result">
+	      		<table id="resultTable">
+	      			<tr>
+	      				<td class="td_chapter">Chapter</td>
+	      				<td>Contents</td>
+	      			</tr>
+	      			
+	      		</table>
+<!--         		<p>test</p> -->
+        	</div>
     	</div>
+    	
 	</body>
 </html>

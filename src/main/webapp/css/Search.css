@@ -50,3 +50,12 @@ border-radius: 50%;
 color:white;
 text-decoration:none;
 }
+
+.search_result{
+margin-bottom: auto;
+margin-top: auto;
+}
+
+.td_chapter{
+	width: 180px;
+}
