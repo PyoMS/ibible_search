@@ -3,6 +3,7 @@ package com.pyo.home.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,7 +20,7 @@ public class IbiblesRestController {
 	
 	@GetMapping("/{contents}")
 	public List<Bible> retrieveContents(@PathVariable String contents) throws Exception{
-		List<Bible> biblelist = ibibleRepository.findAllContents(contents);
+		List<Bible> biblelist = ibibleRepository.findAllContents(contents, Sort.by(Sort.Direction.DESC,"id"));
 		return biblelist;
 	}
 
