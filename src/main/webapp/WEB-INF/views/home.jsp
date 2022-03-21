@@ -64,7 +64,29 @@
 						}
 					});
 			}
-			//TODO add Enter event 
+			
+			var StringBuffer = function() { this.buffer = new Array(); }; 
+			StringBuffer.prototype.append = function(str) { this.buffer[this.buffer.length] = str; }; 
+			StringBuffer.prototype.toString = function() { return this.buffer.join(""); };
+			
+			//TODO search highlight search_input in Contents 
+			let highlightSearchInput = function(search_input, contents){
+// 				let str = 'abcabcabc';
+// 				let searchvalue = 'ab';
+				let result = new StringBuffer();
+				let ini_pos=0;
+				let pos = 0;
+				let searchInputLength = search_input.length;
+				while (true) {
+					let foundPos = contents.indexOf(search_input, pos);
+					if (foundPos == -1) break;
+					console.log( foundPos );
+					result.append(contents.substring(ini_pos,foundPos)); //FIXME
+					pos = foundPos + 1;
+				}
+				
+				return result.toString();
+			}
 		</script>
 	</head>
 	
