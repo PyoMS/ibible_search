@@ -10,6 +10,7 @@
     	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
     	<link href="../css/Search.css" rel="stylesheet">
     	<script src="../js/markJS/mark.min.js"></script>
+    	<script src="../js/markJS/jquery.mark.min.js"></script>
     	<script type="text/javascript">
 			$(function(){
 				$('#search_icon').click(function(){
@@ -19,33 +20,6 @@
 				$('#search_input').keydown(function(evt){
 				    if( evt.keyCode == 13 ) searchAjax();
 				});
-			});
-			
-			$(function() {
-
-			  var mark = function() {
-
-			    // Read the keyword
-			    var keyword = $("input[name='keyword']").val();
-
-			    // Determine selected options
-			    var options = {};
-			    $("input[name='opt[]']").each(function() {
-			      options[$(this).val()] = $(this).is(":checked");
-			    });
-
-			    // Remove previous marked elements and mark
-			    // the new keyword inside the context
-			    $(".context").unmark({
-			      done: function() {
-			        $(".context").mark(keyword, options);
-			      }
-			    });
-			  };
-
-			  $("input[name='keyword']").on("input", mark);
-			  $("input[type='checkbox']").on("change", mark);
-
 			});
 			
 			let hasResult = false;
@@ -86,6 +60,7 @@
 									hasResult = true;
 								}
 								$("#resultTable").append(result);
+								$("#resultTable").mark(params);
 
 							}else{
 								alert('FAIL');
@@ -94,29 +69,6 @@
 					});
 			}
 			
-			var StringBuffer = function() { this.buffer = new Array(); }; 
-			StringBuffer.prototype.append = function(str) { this.buffer[this.buffer.length] = str; }; 
-			StringBuffer.prototype.toString = function() { return this.buffer.join(""); };
-			
-			//TODO search highlight search_input in Contents 
-			let highlightSearchInput = function(search_input, contents){
-// 				let str = 'abcabcabc';
-// 				let searchvalue = 'ab';
-				let result = new StringBuffer();
-				let ini_pos=0;
-				let pos = 0;
-				let searchInputLength = search_input.length;
-				while (true) {
-					let foundPos = contents.indexOf(search_input, pos);
-					if (foundPos == -1) break;
-					console.log( foundPos );
-					result.append(contents.substring(ini_pos,foundPos)); //FIXME
-					ini_pos = foundPos;
-					pos = foundPos + 1;
-				}
-				
-				return result.toString();
-			}
 		</script>
 	</head>
 	
@@ -128,7 +80,7 @@
 	          <a class="search_icon" id="search_icon"><i class="fas fa-search"></i></a>
 	        </div>
 	      </div>
-	      	<div class="search_result">
+	      	<div class="search_result context">
 	      		<table id="resultTable">
 	      			<tr>
 	      				<td class="td_chapter">Chapter</td>
