@@ -9,6 +9,7 @@
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
     	<link href="../css/Search.css" rel="stylesheet">
+    	<script src="../js/markJS/mark.min.js"></script>
     	<script type="text/javascript">
 			$(function(){
 				$('#search_icon').click(function(){
@@ -19,6 +20,34 @@
 				    if( evt.keyCode == 13 ) searchAjax();
 				});
 			});
+			
+			$(function() {
+
+			  var mark = function() {
+
+			    // Read the keyword
+			    var keyword = $("input[name='keyword']").val();
+
+			    // Determine selected options
+			    var options = {};
+			    $("input[name='opt[]']").each(function() {
+			      options[$(this).val()] = $(this).is(":checked");
+			    });
+
+			    // Remove previous marked elements and mark
+			    // the new keyword inside the context
+			    $(".context").unmark({
+			      done: function() {
+			        $(".context").mark(keyword, options);
+			      }
+			    });
+			  };
+
+			  $("input[name='keyword']").on("input", mark);
+			  $("input[type='checkbox']").on("change", mark);
+
+			});
+			
 			let hasResult = false;
 			let searchAjax = function(){
 					var params = $('#search_input').val();
@@ -82,6 +111,7 @@
 					if (foundPos == -1) break;
 					console.log( foundPos );
 					result.append(contents.substring(ini_pos,foundPos)); //FIXME
+					ini_pos = foundPos;
 					pos = foundPos + 1;
 				}
 				
