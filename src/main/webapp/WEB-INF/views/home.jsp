@@ -73,23 +73,21 @@
 	</head>
 	
 	<body>
-		<div class="container h-100">
+		<div class="container h-100" id="searchSection">
 	      <div class="d-flex justify-content-center h-100">
 	        <div class="searchbar">
 	          <input class="search_input" id="search_input" type="text" name="" placeholder="Search...">
 	          <a class="search_icon" id="search_icon"><i class="fas fa-search"></i></a>
 	        </div>
 	      </div>
-	      	<div class="search_result context">
+	      	<div class="search_result">
 	      		<table id="resultTable">
 	      			<tr>
 	      				<td class="td_chapter">Chapter</td>
 	      				<td>Contents</td>
 	      			</tr>
-	      			
 	      		</table>
-<!--         		<p>test</p> -->
-        	</div>
+	       	</div>
     	</div>
     	
 	</body>

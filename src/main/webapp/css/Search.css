@@ -54,6 +54,13 @@ text-decoration:none;
 .search_result{
 margin-bottom: auto;
 margin-top: auto;
+display: inline;
+transition: height 0.4s linear;
+}
+
+tr:hover td{
+background: orange;
+transition: background 0.4s linear;
 }
 
 .td_chapter{
@@ -63,4 +70,8 @@ margin-top: auto;
 table, th, td {
   border: 1px solid black;
   border-collapse: collapse;
+}
+
+#searchSection{
+	position: relative;
 }
